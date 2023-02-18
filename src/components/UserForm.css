@@ -1,0 +1,19 @@
+.form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column ;
+}
+.form_input{
+    width: 94%;
+    height: 3rem;
+    display: block;
+    margin: 0.5rem;
+    border:2px solid #617e79;
+    border-radius: 5px;
+    background-color: #F5EFE6;
+}
+.form_input:focus{
+    border:2px solid #617e79;
+    border-radius: 5px;
+}

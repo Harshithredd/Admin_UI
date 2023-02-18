@@ -1,5 +1,12 @@
 .searchBox{
     width: 100vw;
-    border-radius: 0;
+    border-radius: 0px;
     height: 2rem;
+    transition: all 0.2s ease-in-out;
+    border:2px solid #617e79;
+    outline: none;
+}
+.searchBox:focus{
+    height: 3rem;
+    border:2px solid #617e79;
 }

@@ -30,15 +30,14 @@ export default function UserForm(){
     },[])
     return(
         <>
-                <form>
-                    <label htmlFor="name">Name</label>
-                    <input name="name" placeholder="Enter Name" value={formData.name} onChange={handleFormData}></input>
-                    <br/>
-                    <label htmlFor="name">Email</label>
-                    <input name="email" placeholder="Enter Email" value={formData.email} onChange={handleFormData}></input>
-                    <br/>
-                    <label htmlFor="name">Role</label>
-                    <input name="role" placeholder="Enter Role" value={formData.role} onChange={handleFormData}></input>
+                <form className="form">
+          
+                        <input  className="form_input" name="name" placeholder="Enter Name" value={formData.name} onChange={handleFormData}></input>
+                        <input  className="form_input"name="email" placeholder="Enter Email" value={formData.email} onChange={handleFormData}></input>
+                    
+                    
+                        <input className="form_input" name="role" placeholder="Enter Role" value={formData.role} onChange={handleFormData}></input>
+               
                 </form>
         </>
     )

@@ -109,6 +109,18 @@ export default function UserTable(){
         dispatch(getFilteredUserData(Updatedusers));
         setOpenModal(false);
     }
+    const handelPageNext=()=>{
+        console.log(pageNumber,Math.ceil(filteredUsers.length/itemsPerPage))
+        if(pageNumber <Math.ceil(filteredUsers.length/itemsPerPage)){
+            setPageNumber((prevPageNumber)=>prevPageNumber+1)
+        }
+    }
+    const handelPagePrevious=()=>{
+        console.log(pageNumber)
+        if(pageNumber >1){
+            setPageNumber((prevPageNumber)=>prevPageNumber-1)
+        }
+    }
 
     useEffect(()=>{
         getUsers()
@@ -132,7 +144,7 @@ export default function UserTable(){
                 <thead className="user_table_head">
                     <tr className="row">
                         <td  className="column">
-                            <input type="checkbox" 
+                            <input  type="checkbox" 
                                     checked={checkAll}
                                     onChange={()=> setCheckAll(!checkAll)}>
                         </input></td>
@@ -149,8 +161,8 @@ export default function UserTable(){
                      :
                        ( ArrayToDisplay && ArrayToDisplay.map((user,index)=>{
                             return (
-                                <tr key={user.id} className="row">
-                                    <td className="column">
+                                <tr key={user.id} className={checkboxArray[index] ? "row row_active" : "row"}>
+                                    <td className= {"column"}>
                                         <input type="checkbox" id={index} 
                                             checked={checkboxArray[index]} 
                                             onChange={handelCheckboxChange}>
@@ -180,17 +192,16 @@ export default function UserTable(){
                     <button className="button_delete" onClick={HandelDeleteSelected}>Delete Selected</button>
                 </div>
                 <div className="nav_arrows_container"> 
-                    <div className="nav_arrows" onClick={()=> setPageNumber(1)}><FirstPageIcon fontSize="medium"/></div>
-                    <div className="nav_arrows" onClick={()=> setPageNumber((prevPageNo)=> prevPageNo-1)}><ArrowBackIosNewIcon fontSize="small"/></div>
-                    <div className="page_numbers_container">
-                    {numberOfPages && numberOfPages.map((pageNo,index)=>{
-                        return <span key={index} className="page_numbers" onClick={()=> setPageNumber(pageNo)}>{pageNo}</span>
-                    })}
-                    </div>
-                   
-
-                    <div  className="nav_arrows" onClick={()=> setPageNumber((prevPageNo)=> prevPageNo+1)}><ArrowForwardIosIcon fontSize="small"/></div>
-                    <div  className="nav_arrows" onClick={()=> setPageNumber(numberOfPages.length)}><LastPageIcon fontSize="medium"/></div>
+                        <div className="nav_arrows button" onClick={()=> setPageNumber(1)}><FirstPageIcon fontSize="medium"/></div>
+                        <div className="nav_arrows button" onClick={handelPagePrevious}><ArrowBackIosNewIcon fontSize="small"/></div>
+                        <div className="page_numbers_container">
+                            {numberOfPages && numberOfPages.map((pageNo,index)=>{
+                                return (<span key={index} className= { pageNo== pageNumber ?"page_numbers active" : "page_numbers"} 
+                                        onClick={()=> setPageNumber(pageNo)}>{pageNo}</span>)
+                            })}
+                        </div>
+                        <div  className="nav_arrows button" onClick={handelPageNext}><ArrowForwardIosIcon fontSize="small"/></div>
+                        <div  className="nav_arrows button" onClick={()=>setPageNumber(numberOfPages.length)}><LastPageIcon fontSize="medium"/></div>
                 </div>
             </div>
             <Modal  close={()=> setOpenModal(false)} 
