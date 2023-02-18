@@ -1,0 +1,89 @@
+
+.table_container{
+    overflow-x: scroll;
+    width: 100vw;
+    background-color: rgb(254, 255, 254);
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+.user_table{
+    max-width: 100vw;
+    overflow-x: scroll;
+    border-collapse: collapse; 
+ }
+
+.user_table_head{
+    color: #181d31;
+    font-weight: 550;
+    font-size: 1.2rem;
+} 
+
+.row{
+    height: 2.7rem;
+    border-bottom: solid rgba(0, 0, 0, 0.2) 0.2px;
+}
+.column{
+    padding: 0 1.5rem;
+    width: 18rem;
+}
+input[type=checkbox] {
+    accent-color: #617e79;
+}
+
+.button{
+    display: inline-block;
+    margin: 0 0.2rem ;
+    padding-right:1rem;
+    transition: all 0.3s ease-out;
+
+}
+.button:hover{
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.navigation_coontainer{
+    display: flex;
+    width: 100vw;
+    align-items: center;
+}
+.delete_button_container{
+    width: 25%;
+}
+.button_delete{
+    background-color: #a4c0a9;
+    border-radius: 10px;
+    padding: 0.4rem;
+    margin: 1rem;
+    color: rgb(0, 0, 0);
+    transition: all 0.3s ease-out;
+    border: none;
+    display: inline-block;
+    box-shadow: 0 3px 5px rgb(0 0 0 / 0.4);
+}
+.button_delete:hover{
+    background-color: rgba(255, 13, 13, 0.3);
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+}
+
+.nav_arrows_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.nav_arrows{
+    display: inline-block;
+    padding: 0 0.5rem;
+    margin: 0 1rem;
+}
+.page_numbers_container{
+    height: 1.4rem;
+}
+.page_numbers{
+    width: 1.4rem;
+    height: 1.4rem;
+    padding: 0.3rem;
+    border: solid #617e79 1px;
+    border-radius: 0%;
+    margin: 0 0.5rem;
+}
