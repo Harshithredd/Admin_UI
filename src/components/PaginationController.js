@@ -13,8 +13,9 @@ export default function PaginationController({setPageNumber,numberOfPages,pageNu
         }
     );
     const filteredUsers = usersState.filteredUsers;
+    const lastPageNumber =Math.ceil(filteredUsers.length/ITEMS_PER_PAGE);
     const handelPageNext=()=>{
-        console.log(pageNumber,Math.ceil(filteredUsers.length/ITEMS_PER_PAGE))
+        // console.log(pageNumber,Math.ceil(filteredUsers.length/ITEMS_PER_PAGE))
         if(pageNumber <Math.ceil(filteredUsers.length/ITEMS_PER_PAGE)){
             setPageNumber((prevPageNumber)=>prevPageNumber+1)
         }
@@ -36,11 +37,13 @@ export default function PaginationController({setPageNumber,numberOfPages,pageNu
                     </button>
                 </div>
                 <div className="nav_arrows_container"> 
-                    <div  className="nav_arrows button" data-testid="firstPage_button" onClick={() => setPageNumber(1)}>
-                                <FirstPageIcon fontSize="medium" />
+                    <div    className={"nav_arrows button"}
+                            data-testid="firstPage_button" 
+                            onClick={() => setPageNumber(1)}>
+                                <FirstPageIcon fontSize="medium" className={pageNumber <2 ? 'disabled':""} />
                     </div>
                     <div className="nav_arrows button" data-testid="previousPage_button" onClick={handelPagePrevious}>
-                        <ArrowBackIosNewIcon fontSize="small" />
+                        <ArrowBackIosNewIcon fontSize="small" className={pageNumber <2 ? 'disabled':""} />
                     </div>
                     <div className="page_numbers_container">
                         {numberOfPages && numberOfPages.map((pageNo, index) => {
@@ -54,12 +57,12 @@ export default function PaginationController({setPageNumber,numberOfPages,pageNu
                         })}
                     </div>
                     <div className="nav_arrows button" data-testid="nextPage_button" 
-                         onClick={handelPageNext}>
-                        <ArrowForwardIosIcon fontSize="small" />
+                         onClick={handelPageNext} >
+                        <ArrowForwardIosIcon fontSize="small" className={pageNumber >=lastPageNumber ? 'disabled':""}/>
                     </div>
                     <div className="nav_arrows button"  data-testid="LastPage_button"
                         onClick={() => setPageNumber(numberOfPages.length)}>
-                        <LastPageIcon fontSize="medium" />
+                        <LastPageIcon fontSize="medium" className={pageNumber >=lastPageNumber ? 'disabled':""}/>
                     </div>
               </div>
         </div>

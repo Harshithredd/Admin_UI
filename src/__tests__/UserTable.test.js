@@ -211,7 +211,4 @@ describe("Modal Component",()=>{
         
     });
 
-    /// test case for changing the value of input
-
-
 })
