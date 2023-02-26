@@ -37,12 +37,13 @@ export default function PaginationController({setPageNumber,numberOfPages,pageNu
                     </button>
                 </div>
                 <div className="nav_arrows_container"> 
-                    <div    className={"nav_arrows button"}
+                    <div    className={pageNumber <2 ? 'nav_arrows':"nav_arrows button"}
                             data-testid="firstPage_button" 
                             onClick={() => setPageNumber(1)}>
                                 <FirstPageIcon fontSize="medium" className={pageNumber <2 ? 'disabled':""} />
                     </div>
-                    <div className="nav_arrows button" data-testid="previousPage_button" onClick={handelPagePrevious}>
+                    <div className={pageNumber <2 ? 'nav_arrows':"nav_arrows button"}
+                         data-testid="previousPage_button" onClick={handelPagePrevious}>
                         <ArrowBackIosNewIcon fontSize="small" className={pageNumber <2 ? 'disabled':""} />
                     </div>
                     <div className="page_numbers_container">
@@ -56,11 +57,13 @@ export default function PaginationController({setPageNumber,numberOfPages,pageNu
                                 </span>); 
                         })}
                     </div>
-                    <div className="nav_arrows button" data-testid="nextPage_button" 
+                    <div className={pageNumber >=lastPageNumber ? 'nav_arrows':"nav_arrows button"} 
+                         data-testid="nextPage_button" 
                          onClick={handelPageNext} >
                         <ArrowForwardIosIcon fontSize="small" className={pageNumber >=lastPageNumber ? 'disabled':""}/>
                     </div>
-                    <div className="nav_arrows button"  data-testid="LastPage_button"
+                    <div className={pageNumber >=lastPageNumber ? 'nav_arrows':"nav_arrows button"}  
+                        data-testid="LastPage_button"
                         onClick={() => setPageNumber(numberOfPages.length)}>
                         <LastPageIcon fontSize="medium" className={pageNumber >=lastPageNumber ? 'disabled':""}/>
                     </div>
