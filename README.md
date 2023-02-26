@@ -1,3 +1,10 @@
+# Geektrust Admin UI Challenge
+## Project Live URL
+https://admin-ui-harshithgs.netlify.app
+
+## Challenge URL
+https://www.geektrust.com/coding/detailed/admin-ui
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
