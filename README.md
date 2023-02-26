@@ -1,6 +1,6 @@
 # Geektrust Admin UI Challenge
 ## Project Live URL
-https://admin-ui-harshithgs.netlify.app
+[https://admin-ui-harshithgs.netlify.app](https://admin-ui-harshithgs.netlify.app/)
 
 ## Challenge URL
 https://www.geektrust.com/coding/detailed/admin-ui
