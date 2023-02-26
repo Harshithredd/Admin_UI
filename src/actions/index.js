@@ -1,4 +1,4 @@
-import { GET_FILTERED_USER_DATA, GET_USER_DATA, POPULATE_SELECTED_USER_IN_FORM, UPDATE_SELECTED_USER, UPDATE_SELECTED_USERID } from "../constants/action-types"
+import { GET_FILTERED_USER_DATA, GET_USER_DATA, POPULATE_SELECTED_USER_IN_FORM, SET_PAGE_NUMBER, UPDATE_SELECTED_USER, UPDATE_SELECTED_USERID } from "../constants/action-types"
 
 export const  getUserData = (userdata)=>{
     return {
@@ -33,3 +33,6 @@ export const  populateSelectedUserInForm = (user)=>{
         payload : user
     }
 }
+
+
+

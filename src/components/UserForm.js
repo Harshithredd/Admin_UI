@@ -31,13 +31,22 @@ export default function UserForm(){
     return(
         <>
                 <form className="form">
-          
-                        <input  className="form_input" name="name" placeholder="Enter Name" value={formData.name} onChange={handleFormData}></input>
-                        <input  className="form_input"name="email" placeholder="Enter Email" value={formData.email} onChange={handleFormData}></input>
-                    
-                    
-                        <input className="form_input" name="role" placeholder="Enter Role" value={formData.role} onChange={handleFormData}></input>
-               
+                        <input  className="form_input" 
+                                name="name" 
+                                placeholder="Enter Name"
+                                value={formData.name} 
+                                onChange={handleFormData} />
+
+                        <input  className="form_input"
+                                name="email" 
+                                placeholder="Enter Email" 
+                                value={formData.email} 
+                                onChange={handleFormData} />
+
+                        <input  className="form_input" 
+                                name="role" placeholder="Enter Role" 
+                                value={formData.role} 
+                                onChange={handleFormData} />
                 </form>
         </>
     )

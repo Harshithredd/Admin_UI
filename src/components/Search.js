@@ -33,6 +33,7 @@ export default function Search(){
         <>
             <input  className="searchBox"
                     type="text" 
+                    name="search"
                     placeholder="Search by name email or role" 
                     value={searchValue}
                     onChange={(e)=> setSearchValue(e.target.value)}

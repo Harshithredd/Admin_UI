@@ -6,12 +6,8 @@ import Modal from "./Modal";
 import UserForm from "./UserForm";
 import { useDispatch, useSelector } from "react-redux";
 import { getFilteredUserData, getUserData, updateselectedUserId } from "../actions";
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import FirstPageIcon from '@mui/icons-material/FirstPage';
-import LastPageIcon from '@mui/icons-material/LastPage';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import PaginationController from "./PaginationController";
+import UserRow from "./UserRow";
 
 const tableHeadings = ["Name","Email","Role","Actions"]
 export default function UserTable(){
@@ -38,7 +34,7 @@ export default function UserTable(){
         const lastPageNumber = itemsPerPage * pageNumber;
         const firstPageNumber = lastPageNumber - itemsPerPage;
         const updatedItemsToDisplay = filteredUsers.slice(firstPageNumber,lastPageNumber);
-        console.log(firstPageNumber,lastPageNumber,updatedItemsToDisplay);
+       // console.log(firstPageNumber,lastPageNumber,updatedItemsToDisplay);
         const pageNumbers=[];
         for(let i=1;i<=Math.ceil(filteredUsers.length/itemsPerPage);i++){
             pageNumbers.push(i);
@@ -109,18 +105,6 @@ export default function UserTable(){
         dispatch(getFilteredUserData(Updatedusers));
         setOpenModal(false);
     }
-    const handelPageNext=()=>{
-        console.log(pageNumber,Math.ceil(filteredUsers.length/itemsPerPage))
-        if(pageNumber <Math.ceil(filteredUsers.length/itemsPerPage)){
-            setPageNumber((prevPageNumber)=>prevPageNumber+1)
-        }
-    }
-    const handelPagePrevious=()=>{
-        console.log(pageNumber)
-        if(pageNumber >1){
-            setPageNumber((prevPageNumber)=>prevPageNumber-1)
-        }
-    }
 
     useEffect(()=>{
         getUsers()
@@ -130,7 +114,7 @@ export default function UserTable(){
         updateItemsInPageinationTable();
     },[filteredUsers])
     useEffect(()=>{
-        let selectAll = checkboxArray.map((check,index)=> checkAll)
+        let selectAll = checkboxArray.map(()=> checkAll)
         setCheckboxArray(selectAll);
     },[checkAll])
     useEffect(()=>{
@@ -144,7 +128,8 @@ export default function UserTable(){
                 <thead className="user_table_head">
                     <tr className="row">
                         <td  className="column">
-                            <input  type="checkbox" 
+                            <input  data-testid="check_all"
+                                    type="checkbox" 
                                     checked={checkAll}
                                     onChange={()=> setCheckAll(!checkAll)}>
                         </input></td>
@@ -155,55 +140,26 @@ export default function UserTable(){
                 </thead>
                 <tbody className="user_table_body">
                     {
-                        isLoading && <h4>LOADING...........</h4>
+                        isLoading && <h4 data-testid="loading">LOADING...........</h4>
                     }
-                    { noUserFound ? ( <h5>NO USER FOUND</h5>)
+                    { noUserFound ? ( <h5>NO USER FOUND</h5> )
                      :
                        ( ArrayToDisplay && ArrayToDisplay.map((user,index)=>{
                             return (
-                                <tr key={user.id} className={checkboxArray[index] ? "row row_active" : "row"}>
-                                    <td className= {"column"}>
-                                        <input type="checkbox" id={index} 
-                                            checked={checkboxArray[index]} 
-                                            onChange={handelCheckboxChange}>
-                                        </input>
-                                    </td>
-                                    <td className="column">{user.name}</td>
-                                    <td className="column">{user.email}</td>
-                                    <td className="column">{user.role}</td>
-                                    <td className="column"> 
-                                        <div className="button" id={user.id} onClick={handleUserEdit}>
-                                            <EditIcon />
-                                        </div> 
-                                        <div className="button" id={user.id} onClick={handleUserDelete}>
-                                            <DeleteIcon/>
-                                        </div>
-                                    </td>
-                                </tr>
-                                
+                                <UserRow   index={index} handelCheckboxChange={handelCheckboxChange} 
+                                handleUserEdit={handleUserEdit} handleUserDelete={handleUserDelete} 
+                                checkboxArray={checkboxArray} user={user} />
                             )
                             })
                        )
                     } 
                 </tbody>
             </table>
-            <div className="navigation_coontainer">
-                <div className="delete_button_container">
-                    <button className="button_delete" onClick={HandelDeleteSelected}>Delete Selected</button>
-                </div>
-                <div className="nav_arrows_container"> 
-                        <div className="nav_arrows button" onClick={()=> setPageNumber(1)}><FirstPageIcon fontSize="medium"/></div>
-                        <div className="nav_arrows button" onClick={handelPagePrevious}><ArrowBackIosNewIcon fontSize="small"/></div>
-                        <div className="page_numbers_container">
-                            {numberOfPages && numberOfPages.map((pageNo,index)=>{
-                                return (<span key={index} className= { pageNo== pageNumber ?"page_numbers active" : "page_numbers"} 
-                                        onClick={()=> setPageNumber(pageNo)}>{pageNo}</span>)
-                            })}
-                        </div>
-                        <div  className="nav_arrows button" onClick={handelPageNext}><ArrowForwardIosIcon fontSize="small"/></div>
-                        <div  className="nav_arrows button" onClick={()=>setPageNumber(numberOfPages.length)}><LastPageIcon fontSize="medium"/></div>
-                </div>
-            </div>
+            <PaginationController   setPageNumber={setPageNumber}  
+                    numberOfPages={numberOfPages} 
+                    pageNumber={pageNumber} 
+                    HandelDeleteSelected={HandelDeleteSelected}/>
+            
             <Modal  close={()=> setOpenModal(false)} 
                     open={openModal} 
                     title={"Edit User"} 
@@ -212,4 +168,7 @@ export default function UserTable(){
             </Modal>
         </div>
     )
-}
+
+
+    
+    }

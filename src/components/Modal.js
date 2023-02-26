@@ -16,8 +16,8 @@ export default function Modal({open,close,title,children,handelModalSubmit}) {
                     {children}
                 </div>
                 <div className="modal_footer">
-                    <div onClick={handelModalSubmit} className="update_button"> Update User</div>
-                    <button onClick={close} className="update_button cancel"> Cancel</button>
+                    <div onClick={handelModalSubmit} data-testid="update_id" className="update_button"> Update User</div>
+                    <button onClick={close} data-testid="delete_id"  className="update_button cancel"> Cancel</button>
                 </div>
             </div>
         </div>
