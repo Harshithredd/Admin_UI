@@ -50,7 +50,7 @@ export default function UserTable(){
             setIsLoading(true);
             setNoUserFound(false);
             const res = await axios.get(`${config.endpoint}adminui-problem/members.json`);
-            console.log(res);
+            // console.log(res);
            
             dispatch(getUserData(res.data));
             dispatch(getFilteredUserData(res.data));     
@@ -134,13 +134,16 @@ export default function UserTable(){
                                     onChange={()=> setCheckAll(!checkAll)}>
                         </input></td>
                         {
-                            tableHeadings && tableHeadings.map(heading => <td className="column">{heading}</td>)
+                            tableHeadings && 
+                            tableHeadings.map((heading,index) => <td className="column" key={index}>{heading}</td>)
                         }
                     </tr>
                 </thead>
                 <tbody className="user_table_body">
                     {
-                        isLoading && <h4 data-testid="loading">LOADING...........</h4>
+                        isLoading && <tr>
+                                        <td><h4 data-testid="loading">LOADING...........</h4></td>
+                                     </tr>
                     }
                     { noUserFound ? ( <h5>NO USER FOUND</h5> )
                      :
@@ -148,7 +151,7 @@ export default function UserTable(){
                             return (
                                 <UserRow   index={index} handelCheckboxChange={handelCheckboxChange} 
                                 handleUserEdit={handleUserEdit} handleUserDelete={handleUserDelete} 
-                                checkboxArray={checkboxArray} user={user} />
+                                checkboxArray={checkboxArray} user={user} key={user.id}/>
                             )
                             })
                        )

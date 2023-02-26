@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { getFilteredUserData, getUserData } from "../actions";
+import { getFilteredUserData } from "../actions";
 import "./Search.css"
 
 export default function Search(){
@@ -11,7 +11,6 @@ export default function Search(){
         }
     );
     const userData = usersState.allUsers;
-    const filteredUsers = usersState.filteredUsers;
     const updateUserDataBasedOnSearch = ()=>{
         if(searchValue === ""){
             dispatch(getFilteredUserData(userData))
